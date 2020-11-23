@@ -1,46 +1,62 @@
-# PupperCoin
 
-![title](./image/title.jpg)
+![Crowdfund](./image/Crowdfund.jpg)
 
-This contract provide you  a platform to raise fund by crowfinding on Ethereum platform. You can follow crowfinding procedure step by step as belowed. 
+## This contract provide the ability to crowdfund using the Ethereum platform. 
+
+You will need to create an ERC20 token that will be minted through a `Crowdsale` contract that you can leverage from the OpenZeppelin Solidity library.
+
+This crowdsale contract will manage the entire process, allowing users to send ETH and get back PUP (PupperCoin).
+This contract will mint the tokens automatically and distribute them to buyers in one transaction.
+
+It will need to inherit `Crowdsale`, `CappedCrowdsale`, `TimedCrowdsale`, `RefundableCrowdsale`, and `MintedCrowdsale`.
+
+You will conduct the crowdsale on the Kovan or Ropsten testnet in order to get a real-world pre-production test in.
 
 ## Contracts
 
-* PupperCoin.sol
-* CrowdSale.sol
+Using Remix, create a file called `PupperCoin.sol` and create a standard `ERC20Mintable` token.
 
-## Deploy Contracts
+Create a new contract named `Crowdsale.sol`, and prepare it like a standard crowdsale.
 
-### 1. Mint your coin.
 
-Use `PupperCoin.sol` to mint your coin on minter account setted in the contract. Use `Remix` to compile and deploy the contract by providing neccesary variables such as `name`, `symbol`, and `initial supply`. 
+### 1.1: ERC20 PupperCoin
 
-![construct1](./image/1_construct_puppercoin.png)
+Open the PupperCoin.sol file you created on remix
 
-These are functions relevant to minting your coin.
+Using `ERC20Mintable` and `ERC20Detailed` contract, hardcoding `18` as the `decimals` parameter, and leaving the `initial_supply` parameter alone.
 
-![deploy1](./image/2_puppercoin_depolyed.png)
+There is no need to hardcode the decimals, however since most use-cases match Ethereum's default, you may do so.
 
-You can add minter account address by `addMinter`.
+### 1.2: Crowdsale
+Open the Crowdsale.sol file you created on remix
 
-![minter](./image/3_add_minter_account.png)
+You will need to bootstrap the contract by inheriting the following OpenZeppelin contracts:
 
-Then mint the coin in `mint`.
+* `Crowdsale`
 
-![mint](./image/4_mint.png)
+* `MintedCrowdsale`
 
-Don't forget to check balance in minther account by using `isMinter` and `balanceOf`.
+* `CappedCrowdsale`
 
-![balance](./image/5_check_coin_details.png)
+* `TimedCrowdsale`
 
-### 2. Crowdsale.
+* `RefundablePostDeliveryCrowdsale`
 
-Now you can sell your coin to raising fund by deploying `CrowdSale.sol` contract. Use `Remix` to compile and deploy the contract by providing neccesary variables such as `rate`, `token address`, `wallet address`and `goal`.  
+Providing parameters for all of the features of your crowdsale, such as the `name`, `symbol`, `wallet` for fundraising, `goal`, etc. Feel free to configure these parameters to your liking.
 
-For `rate`, you can hardcode a rate of 1, to maintain parity with Ether units (1 TKN per Ether, or 1 TKNbit per wei). If you'd like to customize your crowdsale rate, follow the Crowdsale Rate calculator on OpenZeppelin's documentation. Essentially, a token (TKN) can be divided into TKNbits just like Ether can be divided into wei. When using a rate of 1, just like 1000000000000000000 wei is equal to 1 Ether, 1000000000000000000 TKNbits is equal to 1 TKN.
 
-![construct2](./image/6_construct_crowdsale.png)
+### 1.4:  Testing the Crowdsale
 
-These are functions relevant to crowdsaling your coin.
+- Test the crowdsale by sending Ether to the crowdsale from a different account (**not** the same account that is raising funds).
+  
+- Then test the time functionality by replacing `now` with `fakenow`, and create a setter function to modify `fakenow` to whatever time you want to simulate. 
 
-![deploy2](./image/7_crowdsale_depolyed.png)
+### 1.5: Deploying the Crowdsale
+
+Deploy the crowdsale to the Kovan or Ropsten testnet, and store the deployed address for later. Switch MetaMask to your desired network, and use the `Deploy` tab in Remix to deploy your contracts. Take note of the total gas cost, and compare it to how costly it would be in reality. Since you are deploying to a network that you don't have control over, faucets will not likely give out 300 test Ether. You can simply reduce the goal when deploying to a testnet to an amount much smaller, like 10,000 wei.
+
+#### 1.5.1: Deployment on Kovan testnet
+
+Deploy the crowdsale to the Kovan or Ropsten testnet, and store the deployed address for later. Switch MetaMask to your desired network, and use the Deploy tab in Remix to deploy your contracts.
+
+
