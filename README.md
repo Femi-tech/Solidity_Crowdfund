@@ -49,10 +49,7 @@ Providing parameters for all of the features of your crowdsale, such as the `nam
 
 - Test the crowdsale by sending Ether to the crowdsale from a different account (**not** the same account that is raising funds).
   
-- After crowdsale work as expected, I added the token to MyCrypto and tested a transaction.
-  
-- Then test the time functionality by replacing `now` with `fakenow`, and create a setter function to modify `fakenow`. 
-
+- Then test the time functionality by replacing `now` with `fakenow`, and create a setter function to modify `fakenow` to whatever time you want to simulate. 
 
 ### 1.5: Deploying the Crowdsale
 
