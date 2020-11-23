@@ -1,6 +1,6 @@
 # PupperCoin
 
-![title](./image/title.jpg)
+![Crowdfund](./image/Crowdfund.jpg)
 
 This contract provide you  a platform to raise fund by crowfinding on Ethereum platform. You can follow crowfinding procedure step by step as belowed. 
 
