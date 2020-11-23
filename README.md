@@ -1,7 +1,7 @@
 
 ![Crowdfund](./image/Crowdfund.jpg)
 
-## This contract provide you a platform to raise fund by crowfinding on Ethereum platform. You can follow crowfinding procedure step by step as belowed. 
+## This contract provide the ability to crowdfund using the Ethereum platform. 
 
 You will need to create an ERC20 token that will be minted through a `Crowdsale` contract that you can leverage from the OpenZeppelin Solidity library.
 
